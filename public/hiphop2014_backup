@@ -95,8 +95,8 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.tsv("groupedH2014.tsv", type, function(error, data) { 
-  x.domain(data.map(function(d) { return d.viewCount; }));
+d3.tsv("groupVC2014.tsv", type, function(error, data) { 
+  x.domain(data.map(function(d) { return d.ratio; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
   svg.append("g")
@@ -117,7 +117,7 @@ d3.tsv("groupedH2014.tsv", type, function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.viewCount); })
+      .attr("x", function(d) { return x(d.ratio); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.total); })
       .attr("height", function(d) { return height - y(d.total); })
@@ -168,7 +168,7 @@ var svg2 = d3.select("body").append("svg")
 
 svg2.call(tip2);
 
-d3.tsv("groupVC2014.tsv", type, function(error, data) { 
+d3.tsv("groupedH2014.tsv", type, function(error, data) { 
   x.domain(data.map(function(d) { return d.viewCount; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
