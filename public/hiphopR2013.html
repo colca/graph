@@ -59,7 +59,7 @@ body {
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-<h2 align="center">Hiphop Dance Video Heuristic Value Chart 2013</h2>
+<h2 align="center">Hiphop Dance Video Dislike/LikeCount Ratio Chart 2013</h2>
 <script>
 
 var margin = {top: 40, right: 20, bottom: 30, left: 40},
@@ -95,8 +95,8 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.tsv("groupedH2013.tsv", type, function(error, data) { 
-  x.domain(data.map(function(d) { return d.viewCount; }));
+d3.tsv("groupRatio2013.tsv", type, function(error, data) { 
+  x.domain(data.map(function(d) { return d.ratio; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
   svg.append("g")
@@ -117,7 +117,7 @@ d3.tsv("groupedH2013.tsv", type, function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.viewCount); })
+      .attr("x", function(d) { return x(d.ratio); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.total); })
       .attr("height", function(d) { return height - y(d.total); })
@@ -185,7 +185,7 @@ d3.tsv("groupVC2013.tsv", type, function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Video Count");
+      .text("Total Video Num");
 
   svg2.selectAll(".bar")
       .data(data)
